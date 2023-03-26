@@ -1,14 +1,14 @@
-# Student enrollment system
-This system is made to enroll students in habrie school. 
+# Student enrolment system
+This system is made to enrol students in habrie school. 
 ### Features
- - Enroll a specific student by using enrollment form.
- - Admin can upload bulk student .csv file as well to enroll i.e. to save data in db.
+ - Enrol a specific student by using enrolment form.
+ - Admin can upload bulk student .csv file as well to enrol i.e. to save data in db.
  - Send mail to student who is enrolled and also to `durganand.jha@habrie.com` (admin).
  - Admin can see the list of all students.
  - Admin can see the details of the student and also can upload specific docs like pdf and images corresponding to specific students.
  - 
 ### Assumptions
- - Each student should have unique enrollment ID and email.
+ - Each student should have unique enrolment ID and email.
  - No more than 999 users with same first 3 initial name letters can be registered in one day.
 ### Tech Used
  - Django
@@ -74,6 +74,21 @@ I have created 3 tables primarily
 |doc_path|varchar(100), not null|
 |created_at|bigint, not null|
 |updated_at|bigint, not null|
-   
 ### ER Diagram
 [ER Diagram](https://drive.google.com/file/d/1Qvs3ATYevhQY0SBBkd2nBagTlcE-SySn/view)
+### API Reference
+- `/student/student` *POST*: This API will be used to enroll one student using data.
+- `/student/student` *GET*: This API is used to fetches all students data.
+- `/student/upload` *POST*: This API is used to upload documents for student like images, pdf and also used for bulk importing of student data.
+- `/student/download_sample`:  Used to download sample .csv for bulk load student enrolment data.
+### Get started
+- Clone this repo.
+- Initialise a virtualenv of python. Preferred python3.7
+- Install requirements using the following command
+  > pip install -t requirements.txt
+- Run the server using
+  > python manage.py runserver
+- In another tab run `celery` using following command
+  > celery -A habrie worker -l info
+
+Now, app is up and running.
