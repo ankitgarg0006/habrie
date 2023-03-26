@@ -175,7 +175,15 @@ body {
         }
 
         fetch(`/student/upload?student_enroll_id=${location.pathname.split('/').at(-1)}`,
-        {method: "POST", body: formData});
+        {method: "POST", body: formData})
+        .then(response => response.json())
+        .then(data => {
+          if(!data.success){
+            alert(data.error_message);
+          } else {
+            alert("File uploaded successfully");
+          }
+        });
     }
     window.onload = function() {
         fetch(`/student/student?student_enroll_id=${location.pathname.split('/').at(-1)}`)

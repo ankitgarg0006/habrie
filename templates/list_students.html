@@ -25,6 +25,9 @@
 </head>
 
 <body>
+<div style="margin:1%">
+    <a href="/">HOME</a>
+</div>
 <div id="myGrid" class="ag-theme-alpine" style="height: 519px"></div>
 <input id="upload_doc" type="file" accept=".csv" style="display:none"/>
 <a href="" id="upload_doc_link">Choose document</a>
@@ -124,6 +127,8 @@
         .then(data => {
             if(!data.success) {
                 alert(data.error_message);
+            } else {
+                alert("File uploaded successfully!");
             }
         });
     }

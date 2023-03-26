@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,8 +139,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'webbadm1@gmail.com'
 EMAIL_HOST_PASSWORD = 'umlopbqohqphlqze'
 DEFAULT_FROM_EMAIL = 'WebB Admin'
-
-GRAPH_MODELS = {
-    'all_applications': True,
-    'group_models': True,
-}

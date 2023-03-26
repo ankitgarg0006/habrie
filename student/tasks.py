@@ -4,7 +4,7 @@ from django.conf import settings
 from utils.time_utilities import TimeUtilities
 
 from_mail_address = settings.EMAIL_HOST_USER
-admins_mail_id = 'smacksingla@gmail.com'
+admins_mail_id = 'durganand.jha@habrie.com'
 student_mail_subject = 'Welcome to Habrie'
 student_mail_body = """Dear {},
 You got enroll in Habrie School. Your Enrollment ID is {} let’s provide us the hard documents for the future references.

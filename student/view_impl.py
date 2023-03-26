@@ -291,8 +291,9 @@ class StudentHelper:
         students_data_list = []
         with open(filepath.path, mode='r') as infile:
             reader = csv.DictReader(infile)
-            data_dict = dict(next(reader))
-            students_data_list.append(data_dict)
+
+            for row in reader:
+                students_data_list.append(dict(row))
 
         is_valid, err_msg = StudentHelper.validate_bulk_upload_dict(students_data_list)
 
@@ -304,6 +305,7 @@ class StudentHelper:
     @staticmethod
     @shared_task
     def bulk_import_students(student_data_list):
+        mail_data_dict = []
 
         for student_data in student_data_list:
             validated_dict = StudentHelper.validate_enroll_student_request(student_data)
@@ -342,16 +344,12 @@ class StudentHelper:
             if academic_serializer.is_valid():
                 academic_serializer.save()
 
-                mail_data_dict = [{
+                mail_data_dict.append({
                     'enrollment_id': academic_serializer.instance.enrollment_id,
                     'name': academic_serializer.instance.student.name,
                     'section': academic_serializer.instance.section,
                     'class': academic_serializer.instance.academic_class,
                     'mail_id': academic_serializer.instance.student.mail_id
-                }]
+                })
 
-                send_email.delay(mail_data_dict)
-
-                return {'success': True}
-
-            print(academic_serializer.errors)
+        send_email.delay(mail_data_dict)

@@ -31,6 +31,9 @@ table.inner{
 </style>
 
 <body>
+<div style="margin:1%">
+    <a href="/">HOME</a>
+</div>
 <form id="enrollmentForm">
 <h3>STUDENT ENROLLMENT FORM</h3>
 <table align="center" cellpadding = "10">
@@ -443,16 +446,21 @@ table.inner{
     enrollmentForm.addEventListener('submit', async function (e) {
         e.preventDefault();
         const formData = new FormData(enrollmentForm).entries();
-        const response = await fetch("/student/student", {
+        fetch("/student/student", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(Object.fromEntries(formData))
+        }).then(response => response.json())
+        .then(data => {
+            if(!data.success) {
+                alert(data.error);
+            } else {
+                alert("Student enrolled successfully!");
+            }
         })
-        console.log(await response.json());
-
     });
 </script>
 </html>
